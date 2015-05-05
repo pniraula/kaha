@@ -34,14 +34,13 @@ angular.module('starter.controllers', [])
 })
 .controller('SectionCtrl', function($scope, $rootScope, api, $stateParams, $ionicPopup, $window) {
     $rootScope.selected = {};
-    
     $scope.$on('$ionicView.beforeEnter', function() {
         $scope.name = $stateParams.sectionid;
         $rootScope.toles = [];
         $rootScope.districts = [];
         $rootScope.sectionName = $stateParams.sectionid;
         var refresh = $scope.dataset?false:true;
-        $scope.getData(refresh);
+        $scope.getData(false);
     });
     $rootScope.updateDistrict = function(){
         //$rootScope.toles = api.location.tole($scope.dataset, $scope.name, $rootScope.selected.district);

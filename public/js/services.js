@@ -34,7 +34,8 @@ angular.module('starter.services', [])
       data: function(refresh) {
         var url = "/api";
         var def = $q.defer();
-        if (refresh) {
+        var localData = localStorage.getItem("kahacodata");
+        if (refresh || !localData) {
           $http.get(url).success(function(data) {
             if (data) {
               def.resolve({
@@ -50,10 +51,9 @@ angular.module('starter.services', [])
             });
           });
         } else {
-          var data = JSON.parse(localStorage.getItem("kahacodata"));
           def.resolve({
             success: true,
-            content: data
+            content: JSON.parse(localData)
           });
         }
         return def.promise;
